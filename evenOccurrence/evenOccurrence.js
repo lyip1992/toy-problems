@@ -34,4 +34,30 @@ var evenOccurrence = function(arr) {
 
 };
 
-  	
+// what is our input and output
+// what are our edge cases
+
+// THIS IS THE CORRECT ANSWER
+
+// var evenOccurrence = function(arr) {
+//   var counter = {}, i;
+
+//   for( i = 0; i < arr.length; i++)
+//     counter[arr[i]] = !counter[arr[i]];
+
+//   for( i = 0; i < arr.length; i++)
+//     if (!counter[arr[i]]) return arr[i];
+
+//   return null;
+// };
+
+
+
+
+
+
+
+
+
+
+
