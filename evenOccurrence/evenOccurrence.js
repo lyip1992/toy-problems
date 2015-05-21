@@ -11,5 +11,27 @@
 */
 
 var evenOccurrence = function(arr) {
-  // Your code here.
+  
+  var checked = {};
+  var counter;
+
+  for( var i = 0; i < arr.length; i++ ) {
+  	
+  	counter = 0;
+  	if( !checked[i] ) {
+	  
+	  checked[i] = i;
+
+      for ( var k = i + 1; k < arr.length; k++)
+	  if( arr[i] === arr[k]) counter++;
+	    
+	  if( counter !== 0 && counter % 2 === 0) return arr[i];
+    }
+
+  }
+
+  return null;
+
 };
+
+  	
