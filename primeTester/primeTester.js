@@ -9,7 +9,15 @@ var primeTester = function(n) {
     // n isn't a number or n is less than 1 or n is not an integer
     return false;
   }
-  // TODO: return true if n is prime, false otherwise
+  // the brute force method would be to test for everything under between itself and one
+  // this would be one massive for loop
+  // at the end we'll have some thing that stars off true and returns false as soon as the modulus gives
+  // something that isn't zero
+
+  for( var i = n - 1 ; i > 1; i-- )
+  	if( !(n % i) ) return false;
+
+  return true;
 };
 
 /* Extra credit: Write a function that generates a list of all prime numbers
@@ -19,6 +27,32 @@ var primeTester = function(n) {
  */
 
 var primeSieve = function (start, end) {
+  
+  var primes = []; 
+
+  for( var i = start; i <= end; i++ ) {
+  	if( primeTester(i) ) primes.push(i); 
+  }
+
+  return primes;
+
+  // var result = [];
+  // var storage = {};
+
+  // for( var i = 2; i <= end; i++) 
+  // 	storage[i] = 0;
+
+  // for( var i = 2; i <= end; i++) {
+  // 	for( var j = i; j <= end; j * j) {
+  // 	  storage[j] += 1
+  // 	}
+  // }  
+  
+  // for( var key in storage ) {
+  // 	if( storage[key] === 1 key >== start) result.push(key);
+  // }
+
+  // return result;
 };
 
 
