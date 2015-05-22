@@ -11,45 +11,16 @@
 */
 
 var evenOccurrence = function(arr) {
-  
-  var checked = {};
-  var counter;
+  var counter = {}, i;
 
-  for( var i = 0; i < arr.length; i++ ) {
-  	
-  	counter = 0;
-  	if( !checked[i] ) {
-	  
-	  checked[i] = i;
+  for( i = 0; i < arr.length; i++)
+    counter[arr[i]] = !counter[arr[i]];
 
-      for ( var k = i + 1; k < arr.length; k++)
-	  if( arr[i] === arr[k]) counter++;
-	    
-	  if( counter !== 0 && counter % 2 === 0) return arr[i];
-    }
-
-  }
+  for( i = 0; i < arr.length; i++)
+    if (!counter[arr[i]]) return arr[i];
 
   return null;
-
 };
-
-// what is our input and output
-// what are our edge cases
-
-// THIS IS THE CORRECT ANSWER
-
-// var evenOccurrence = function(arr) {
-//   var counter = {}, i;
-
-//   for( i = 0; i < arr.length; i++)
-//     counter[arr[i]] = !counter[arr[i]];
-
-//   for( i = 0; i < arr.length; i++)
-//     if (!counter[arr[i]]) return arr[i];
-
-//   return null;
-// };
 
 
 
