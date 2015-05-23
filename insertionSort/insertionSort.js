@@ -48,7 +48,12 @@ var testingTransform = function(array) {
 
 var insertionSort = function(array) {
   // Your code goes here. Feel free to add helper functions if needed.
-  return array.sort(function(a, b) { return a - b; });
+  return array.sort(function(a, b) { 
+    if( a - b < 0 ) return a - b;
+    if( a - b > 0 ) return b - a;
+    return 0;
+  });
+
 };
 
 
