@@ -46,8 +46,18 @@ var testingTransform = function(array) {
   return transform;
 };
 
-var insertionSort = function(array
-) {
+var insertionSort = function(array) {
   // Your code goes here. Feel free to add helper functions if needed.
-  return array;
+  return array.sort(function(a, b) { return a - b; });
 };
+
+
+
+
+
+
+
+
+
+
+
