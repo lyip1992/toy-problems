@@ -11,4 +11,17 @@
 
 // Solved in O(n) time with O(1) memory
 var sumArray = function(array) {
+
+  var maxsofar = 0;
+  var maxendinghere = 0;
+  var i;
+
+  for( i = 0; i < array.length; i++ ) {
+    maxendinghere += array[i];
+    if( maxendinghere < 0 ) maxendinghere = 0;
+    if( maxsofar < maxendinghere ) maxsofar = maxendinghere; 
+  }
+
+  return maxsofar;
+
 };
