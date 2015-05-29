@@ -58,7 +58,7 @@ Tree.prototype.map = function (callback) {
 
 Tree.prototype.mapInPlace = function (callback) {
 
-  var newTree = callback(this.value);
+  this.value = callback(this.value);
 
   this.children.forEach(function(child) {
     child.mapInPlace(callback);
