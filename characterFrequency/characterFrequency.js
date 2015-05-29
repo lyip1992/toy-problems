@@ -35,50 +35,30 @@
  *
  */
 
-
-var characterFrequency = function(string) {
-  var dictionary = {};
-  var secondDictionary = {};
-  var numbers = [];
-  var letters = [];
-  var result = [];
-
-  for( var i = 0; i < string.length; i++ ) {
-    if( !dictionary[string[i]] ) dictionary[string[i]] = 1;
-    else dictionary[string[i]] += 1;
-  }
+var characterFrequency = function(string) { // from solution lecture
   
-  for( var key in dictionary ) {
-    numbers.push(dictionary[key]);
+  var letter, result = [], frequencies = {}, i;
+
+  for( i = 0;  i < string.length; i++ ) {
+    letter = string.charAt(i);
+    frequencies[letter] = frequencies[letter] || 0;
+    frequencies[letter]++;
   }
 
-  numbers.sort(function(a, b) { return b - a; });
+  for( var letter in frequencies ) {
+    result.push( [letter, frequencies[letter]] );
+  }
 
-  // sort by frequency
-  for( var i = 0; i < numbers.length; i++ ) {
-  	for( var key in dictionary ) {
-  	  if( letters.indexOf(key) === -1 && numbers[i] === dictionary[key])
-  	  	letters.push(key);
-  	}
-  }
-  
-  for( var i = 0; i < letters.length; i++ ) {
-  	if( letters[i] > letters[i + 1] && numbers[i] === numbers[i + 1]) {
-  	  var temp = letters[i];
-  	  letters[i] = letters[i + 1];
-  	  letters[i + 1] = temp;
-  	}
-  }
-  // sort by character
-  for( var i = 0; i < letters.length; i++ ) {
-  	result.push([letters[i], numbers[i]]);
-  }
+  result.sort(function(a, b) {
+    if( a[1] > b[1] ) return -1;
+    else if( a[1] < b[1] ) return 1;
+    else if( a[0] < b[0] ) return -1;
+    else if( a[0] > b[0] ) return 1;
+    return 0;
+  });
 
   return result;
 };
-
-console.log(characterFrequency('mmmaaaiiibbb'));
-
 
 
 
