@@ -37,6 +37,8 @@
 
 // This function is to help you test, and should not be incorporated in your solution.
 // It will transform an array of numbers into an array of valid objects.
+
+
 var testingTransform = function(array) {
   var transform = [];
   
@@ -46,22 +48,22 @@ var testingTransform = function(array) {
   return transform;
 };
 
-var insertionSort = function(array) {
+var insertionSort = function(array) { // from solution lecture
   // Your code goes here. Feel free to add helper functions if needed.
-  return array.sort(function(a, b) { 
-    if( a - b !== 0 ) return a - b;
-    return 0;
-  });
+  for( var ix = 1; ix < array.length; ix++ ) {
+  	var val = array[ix];
+  	var hole = ix;
+
+  	while( hole && val < array[hole - 1] ) {
+  	  array[hole] = array[hole - 1];
+  	  hole -= 1;
+  	}
+
+    array[hole] = val;
+  }
+
+  return array;
 
 };
-
-
-
-
-
-
-
-
-
 
 
