@@ -12,16 +12,14 @@
 // Solved in O(n) time with O(1) memory
 var sumArray = function(array) {
 
-  var maxsofar = 0;
-  var maxendinghere = 0;
+  var maximum = array[0];
   var i;
 
-  for( i = 0; i < array.length; i++ ) {
-    maxendinghere += array[i];
-    if( maxendinghere < 0 ) maxendinghere = 0;
-    if( maxsofar < maxendinghere ) maxsofar = maxendinghere; 
+  for( i = 1; i < array.length; i++ ) {
+    if( array[i - 1] > 0 ) array[i] += array[i - 1];
+    if( maximum < array[i] ) maximum = array[i];
   }
 
-  return maxsofar;
+  return maximum;
 
 };
