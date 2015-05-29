@@ -54,5 +54,19 @@ var numbersToPlace = {
 };
 
 Number.prototype.toEnglish = function () {
-  // return my value as english words
+  var result = '';
+  
+  if( Number(this) / 100000 < 1000) {
+    var ourNumber = Math.floor(Number(this) / 1000000);
+    if(  )
+    if(  )
+    if(  )
+    result += numbersToPlace[100000];
+  }
+
+
+  return result;
 };
+
+
+
