@@ -49,15 +49,15 @@ var testingTransform = function(array) {
 };
 
 var insertionSort = function(array) { // from solution lecture
-  // Your code goes here. Feel free to add helper functions if needed.
-  for( var ix = 1; ix < array.length; ix++ ) {
-  	var val = array[ix];
-  	var hole = ix;
+  
+  for( var i = 1; i < array.length; i++ ) {
+    var val = array[i];
+    var hole = i;
 
-  	while( hole && val < array[hole - 1] ) {
-  	  array[hole] = array[hole - 1];
-  	  hole -= 1;
-  	}
+    while( hole > 0  &&  val.value < array[hole - 1].value ) {
+      array[hole] = array[hole - 1];
+      hole -= 1;
+    }
 
     array[hole] = val;
   }
