@@ -43,36 +43,25 @@ var phoneDigitsToLetters = {
 
 var telephoneWords = function(digitString) {
 
-  // for( var i = 0; i < phoneDigitsToLetters[digitString[0]].length; i++ ) {
-  //   if( digitString.slice(1) ) {
+  var words = [];
 
-  //   }
-  // }
-
-  var permutation = [];
-  var result;
-
-  for( var i = 0; i < digitString.length; i++ ) {
-    var digitList = phoneDigitsToLetters[digitString[i]];
-    for( var j = 0; j < digitList.length; i++ ) {
-      if( telephoneWords(digitString.slice(1)) ) {
-        result += digitList[j];
-        permutation.push(result);
-        result = '';
-      } else {
-        result += digitList[j];
-        telephoneWords(digitString.slice(1));
-      }
-
+  var lettersForDigits = function (word, digits) {
+    if (digits.length === 0) {
+      words.push(word);
+      return;
     }
-  
-  }
-  return permutation;
+
+    var currentDigit = digits[0];
+    var remainDigits = digits.slice(1);
+    var letters = phoneDigitsToLetters[currentDigit].split('');
+    for (var i = 0; i < letters.length; i++) {
+      lettersForDigits(word + letters[i], remainDigits);
+    };
+  };
+  lettersForDigits('', digitString.split(''));
+
+  return words;
 };
-
-
-
-
 
 
 
