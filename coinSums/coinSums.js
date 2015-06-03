@@ -24,8 +24,26 @@ makeChange(1) === 1
 makeChange(2) === 2
 */
 
-var makeChange = function(total){
+var circulation = [1, 2, 5, 10, 20, 50, 100, 200];
 
+var makeChange = function(total, tracker, count) {
+
+  tracker = tracker || 0;
+  count = count || 0;
+
+  for( var i = 0; i < circulation.length; i++ ) {
+    tracker += circulation[i];
+    if( tracker === total ) {
+      count++;
+      tracker = 0;
+      makeChange(total, tracker, count);
+    }
+    
+    if( tracker > circulation[i]) tracker -= circulation[i];
+
+  }
+
+  return count;
 };
 
 
