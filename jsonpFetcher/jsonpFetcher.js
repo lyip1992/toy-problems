@@ -31,4 +31,13 @@
 
 
 var jsonpRequest = function(url, callback) {
+  
+  var script = window.document.createElement('script');
+  script.src = url + '?jsonp=' + callback;
+
+  document.head.appendChild(script);
+
+  script.onload = function() {
+    this.remove();
+  };
 };
