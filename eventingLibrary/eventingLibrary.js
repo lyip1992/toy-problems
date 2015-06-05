@@ -21,6 +21,21 @@
  */
 
 var mixEvents = function(obj) {
-  // TODO: Your code here
+
+  var eventsHash = {};
+  var eventName;
+
+  obj.on = function(event, callback) {
+    for( var key in obj ) {
+      eventName = key.toString() + 'Change';
+      if( event === eventName ) eventsHash[event] = callback;
+    }
+  };
+
+  obj.trigger = function(event) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    eventsHash[event].apply(null, args);
+  };
+
   return obj;
 };
