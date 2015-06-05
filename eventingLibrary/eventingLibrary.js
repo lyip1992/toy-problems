@@ -30,9 +30,11 @@ var mixEvents = function(obj) {
   };
 
   obj.trigger = function(event) {
+    var args = Array.prototype.call(arguments, 1);
+
     if( this.events[event] ) {
       this.events[event].forEach(function(callback) {
-        callback();
+        callback.apply(null, args);
       });
     }
   };
