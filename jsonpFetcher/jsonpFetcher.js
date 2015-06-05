@@ -31,13 +31,10 @@
 
 
 var jsonpRequest = function(url, callback) {
-  
+
   var script = window.document.createElement('script');
-  script.src = url + '?jsonp=' + callback;
+  script.src = url + '?callback=onResponse';
+  window.onResponse = callback;
 
   document.head.appendChild(script);
-
-  script.onload = function() {
-    this.remove();
-  };
 };
