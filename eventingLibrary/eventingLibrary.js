@@ -22,20 +22,19 @@
 
 var mixEvents = function(obj) {
 
-  var eventsHash = {};
-  var eventName;
+  obj.events = {};
 
   obj.on = function(event, callback) {
-    for( var key in obj ) {
-      eventName = key.toString() + 'Change';
-      if( event === eventName ) eventsHash[event] = callback;
-    }
+    this.events[event] = this.events[event] || [];
+    this.events[event].push(callback);
   };
 
   obj.trigger = function(event) {
-    var args = Array.prototype.slice.call(arguments, 1);
-    eventsHash[event].apply(null, args);
+    this.events[event].forEach(function(callback) {
+      callback();
+    });
   };
+
 
   return obj;
 };
