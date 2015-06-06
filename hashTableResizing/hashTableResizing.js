@@ -79,7 +79,7 @@ var makeHashTable = function(){
       if( !bucket ) return;
       for( var i = 0; i < bucket.length; i++ ) {
         var tuple = bucket[i];
-        result.insert(bucket[0], bucket[i]);
+        result.insert(tuple[0], tuple[1]);
       }
     });
   };
