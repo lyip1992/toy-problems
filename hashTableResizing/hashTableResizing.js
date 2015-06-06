@@ -15,7 +15,7 @@ var makeHashTable = function(){
   var size = 0;
 
   result.insert = function(key, value){
-    var idx = getIndexBelowMaxForKey(item, storageLimit);
+    var idx = getIndexBelowMaxForKey(key, storageLimit);
     var bucket = storage[idx];
 
     if( !bucket ) {
@@ -37,7 +37,7 @@ var makeHashTable = function(){
   };
 
   result.retrieve = function(key){
-    var idx = getIndexBelowMaxForKey(item, storageLimit);
+    var idx = getIndexBelowMaxForKey(key, storageLimit);
     var bucket = storage[idx];
 
     if( !bucket ) return null;
@@ -51,7 +51,7 @@ var makeHashTable = function(){
   };
 
   result.remove = function(key){
-    var idx = getIndexBelowMaxForKey(item, storageLimit);
+    var idx = getIndexBelowMaxForKey(key, storageLimit);
     var bucket = storage[idx];
 
     if( !bucket ) return null;
