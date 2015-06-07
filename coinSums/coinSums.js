@@ -24,26 +24,16 @@ makeChange(1) === 1
 makeChange(2) === 2
 */
 
-var circulation = [1, 2, 5, 10, 20, 50, 100, 200];
+var makeChange = function(total) {
+  var coinSizes = [ 1, 2, 5, 10, 20, 50, 100, 200 ];
+  var ways = Array.apply(null, new Array(total + 1)).map(Number.prototype.valueOf, 0);
+  ways[0] = 1;
 
-var makeChange = function(total, tracker, count) {
-
-  tracker = tracker || 0;
-  count = count || 0;
-
-  for( var i = 0; i < circulation.length; i++ ) {
-    tracker += circulation[i];
-    if( tracker === total ) {
-      count++;
-      tracker = 0;
-      makeChange(total, tracker, count);
+  for( var i = 0; i < coinSizes.length; i++ ) {
+    for( var j = coinSizes[i]; j <= total; j++ ) {
+      ways[j] += ways[j - coinSizes[i]];
     }
-    
-    if( tracker > circulation[i]) tracker -= circulation[i];
-
   }
 
-  return count;
+  return ways[ways.length - 1];
 };
-
-
