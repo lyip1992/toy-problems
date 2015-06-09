@@ -2,7 +2,7 @@
  * Assignment: Write a function that returns true if a linked list contains a cycle, or false if it terminates somewhere
  *
  * Explanation:
- * 
+ *
  * Generally, we assume that a linked list will terminate in a null next pointer, as follows:
  *
  * A -> B -> C -> D -> E -> null
@@ -26,15 +26,25 @@
  * nodeE.next = nodeB;
  * hasCycle(nodeA); // => true
  *
- * Constraint 1: Do this in linear time
- * Constraint 2: Do this in constant space
- * Constraint 3: Do not mutate the original nodes in any way
+ * Constraint 1: Do this in linear time - we can only have a total of 6 operations
+ * Constraint 2: Do this in constant space - we cannot have an array that increases with n
+ * Constraint 3: Do not mutate the original nodes in any way - don't mutate the original array
  */
 
 var Node = function(value){
   return { value: value, next: null };
-}
+};
 
 var hasCycle = function(linkedList){
-  // TODO: implement me!
+  var slow = linkedList;
+  var fast = linkedList.next;
+
+  while( true ) {
+    if( !fast || !fast.next ) { return false; }
+    else if( fast === slow || fast.next === slow ) { return true; }
+    else {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+  }
 };
