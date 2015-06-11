@@ -9,7 +9,23 @@
  **/
 
 $(function () {
-  // TODO: your code here!
+  $('th').on('click', function() {
+    var getCellValue = function(row, index) {
+      return $(row).children('td').eq(index).html();
+    };
 
+    var compare = function(index) {
+      return function(a, b) {
+        var valueA = getCellValue(index, a);
+        var valueB = getCellValue(index, b);
+        return $.isNumeric(valueA) && $.isNumeric(valueB) ? valueA - valueB : valueA.localeCompare(valueB);
+      };
+    };
+
+    var table = $(this).parents('table');
+    var rows = table.find('tr:gt(0)').toArray().sort(compare($(this).index()));
+
+    // more work to be done over here
+
+  });
 });
-
