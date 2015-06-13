@@ -31,18 +31,36 @@
  */
 
 var LRUCache = function (limit) {
+  this.limit = limit;
+  this.size = 0;
+  this.list = new List();
+  this.cache = {};
 };
 
-var LRUCacheItem = function (val, key) {
-};
+// var LRUCacheItem = function (val, key) {
+// };
 
 LRUCache.prototype.size = function () {
+  return this.size;
 };
 
 LRUCache.prototype.get = function (key) {
+  this.list.moveToFront(this.cache[key]);
+  return this.cache[key];
 };
 
 LRUCache.prototype.set = function (key, val) {
+  this.list.push(val); // push a node to the front of the list
+  this.cache[key] = val; // add the node to the internal cache
+  this.size++; //increment counter
+
+  if( this.size > this.limit) { // if our size is greater than our limit
+
+   // shift the first item in our list
+   // shift that particular item in our cache
+   // decrement counter
+
+  }
 };
 
 
@@ -170,4 +188,3 @@ ListNode.prototype.delete = function () {
   if (this.prev) { this.prev.next = this.next; }
   if (this.next) { this.next.prev = this.prev; }
 };
-
