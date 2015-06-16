@@ -10,16 +10,24 @@
 // Terror mode: Re-implement all three functions using only bitwise operators.
 
 
-var multiply = function(x, y) {
-  // TODO: should return the product of x * y
+var multiply = function(x, y) { // done
+  if( y === 0 ) return 0;
+  return x += multiply(x, y - 1);
 };
 
-var divide = function(x, y) {
-  // TODO: should return the quotient of x / y
+var divide = function(x, y) { // done
+  var count = 0;
+
+  while( x >= y ) {
+    count += 1;
+    x -= y;
+  }
+
+  return count;
 };
 
-var modulo = function(x, y) {
-  // TODO: should return the remainder of x / y
+var modulo = function(x, y) { // done
+  if( x === 0 ) return 0;
+  if( x < y ) return x;
+  return modulo(x - y, y);
 };
-
-
