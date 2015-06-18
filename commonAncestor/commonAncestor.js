@@ -51,10 +51,19 @@ Tree.prototype.getClosestCommonAncestor = function(/*...*/
   * 3.) me.getAncestorPath(me) -> [me]
   * 4.) grandma.getAncestorPath(H R Giger) -> null
   */
-Tree.prototype.getAncestorPath = function(/*...*/
-){
-  // TODO: implement me!
-}
+Tree.prototype.getAncestorPath = function(person){
+  var result = [];
+
+  if( this.isDescendant(person) ) {
+    result.push(this);
+  }
+
+  for( var i = 0; i < this.children.length; i++ ) {
+    result.concat(this.children[i].getAncestorPath(person));
+  }
+
+  return result;
+};
 
 /**
   * check to see if the provided tree is already a child of this
