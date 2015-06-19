@@ -37,20 +37,11 @@ var translateRomanNumeral = function(romanNumeral, result){
   if( nextRN === undefined ) {
     result += currentRN;
     return result;
-  }
-
-  else if( currentRN === nextRN ) {
+  } else if( currentRN >= nextRN ) {
     result += currentRN;
     return translateRomanNumeral(romanNumeral.substr(1), result);
-  }
-
-  else if( currentRN < nextRN ) {
+  } else if( currentRN < nextRN ) {
     result -= currentRN;
-    return translateRomanNumeral(romanNumeral.substr(1), result);
-  }
-
-  else if( currentRN > nextRN ) {
-    result += currentRN;
     return translateRomanNumeral(romanNumeral.substr(1), result);
   }
 
