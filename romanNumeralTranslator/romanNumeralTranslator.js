@@ -26,7 +26,29 @@ var DIGIT_VALUES = {
   M: 1000
 };
 
-var translateRomanNumeral = function(romanNumeral){
-// TODO: Implement me!
+var translateRomanNumeral = function(romanNumeral, result){
+  result = result || 0;
+  var currentRN = DIGIT_VALUES[romanNumeral[0]];
+  var nextRN = DIGIT_VALUES[romanNumeral[1]];
+
+  if( nextRN === undefined ) {
+    result += currentRN;
+    return result;
+  }
+
+  else if( currentRN === nextRN ) {
+    result += currentRN;
+    return translateRomanNumeral(romanNumeral.substr(1), result);
+  }
+
+  else if( currentRN < nextRN ) {
+    result -= currentRN;
+    return translateRomanNumeral(romanNumeral.substr(1), result);
+  }
+
+  else if( currentRN > nextRN ) {
+    result += currentRN;
+    return translateRomanNumeral(romanNumeral.substr(1), result);
+  }
 
 };
