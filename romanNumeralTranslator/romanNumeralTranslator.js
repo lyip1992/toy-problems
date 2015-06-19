@@ -27,6 +27,9 @@ var DIGIT_VALUES = {
 };
 
 var translateRomanNumeral = function(romanNumeral, result){
+  if( typeof romanNumeral !== 'string' ) return null;
+  if( romanNumeral.length === 0 ) return 0;
+
   result = result || 0;
   var currentRN = DIGIT_VALUES[romanNumeral[0]];
   var nextRN = DIGIT_VALUES[romanNumeral[1]];
