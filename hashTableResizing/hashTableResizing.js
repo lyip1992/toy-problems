@@ -33,7 +33,7 @@ var makeHashTable = function(){
 
     bucket.push([key, value]);
     size++;
-    if( size > 0.75 * storageLimit ) result.resize( storageLimit * 2 );
+    if( size > 0.75 * storageLimit ) result.resize(storageLimit * 2);
   };
 
   result.retrieve = function(key){
