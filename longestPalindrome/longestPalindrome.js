@@ -26,5 +26,5 @@ var centeredPalindrome = function(str, left, right) {
     right++;
   }
 
-  return str.substr(left + 1, right);
+  return str.slice(left + 1, right);
 };
