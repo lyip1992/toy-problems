@@ -40,6 +40,7 @@ var LRUCache = function (limit) {
 var LRUCacheItem = function (val, key) {
   this.val = val === undefined ? null : val;
   this.key = key === undefined ? null : key;
+  this.node = null;
 };
 
 LRUCache.prototype.size = function () {
