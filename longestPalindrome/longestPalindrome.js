@@ -6,35 +6,25 @@
 * whitespace on each side of dad).
 */
 
-var longestPalindrome = function(string) {
+var longestPalindrome = function(str) {
+  var result = '';
 
-	var maxPalinLength = 0;
-	var longestPalindrome = null;
-	var length = string.length;
+  for( var i = 0; i < str.length; i++ ) {
+    var oddPal = centeredPalindrome(str, i - 1, i + 1);
+    var evenPal = centeredPalindrome(str, i, i + 1);
 
-	// check all possible sub strings
-	for (var i = 0; i < length; i++) {
-		for (var j = i + 1; j < length; j++) {
-			var len = j - i;
-			var curr = string.substring(i, j + 1);
-			if (isPalindrome(curr)) {
-				if (len > maxPalinLength) {
-					longestPalindrome = curr;
-					maxPalinLength = len;
-				}
-			}
-		}
-	}
+    if( oddPal.length > result.length ) { result = oddPal; }
+    if( evenPal.length > result.length ) { result = evenPal; }
+  }
 
-	return longestPalindrome;
+  return result;
 };
 
-var isPalindrome = function(string) {
+var centeredPalindrome = function(str, left, right) {
+  while( left >= 0 && right < str.length && str[left] === str[right] ) {
+    left--;
+    right++;
+  }
 
-	for (var i = 0; i < string.length - 1; i++) {
-		if (string.charAt(i) != string.charAt(string.length - 1 - i)) {
-			return false;
-		}
-	}
-	return true;
+  return str.substr(left + 1, right);
 };
