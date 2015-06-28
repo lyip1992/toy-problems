@@ -31,39 +31,49 @@
  */
 
 var LRUCache = function (limit) {
-  this.limit = limit;
-  this.size = 0;
-  this.list = new List();
-  this.cache = {};
+  this.items = {};
+  this._ordering = new List();
+  this._limit = limit || 10000;
+  this._size = 0;
 };
 
-// var LRUCacheItem = function (val, key) {
-// };
+var LRUCacheItem = function (val, key) {
+  this.val = val === undefined ? null : val;
+  this.key = key === undefined ? null : key;
+};
 
 LRUCache.prototype.size = function () {
-  return this.size;
+  return this._size;
 };
 
 LRUCache.prototype.get = function (key) {
-  this.list.moveToFront(this.cache[key]);
-  return this.cache[key];
+  if( !(key in this._items) ) { return null; }
+
+  var item = this._items[key];
+  this._ordering.moveToFront(item.node);
+  return item.val;
 };
 
 LRUCache.prototype.set = function (key, val) {
-  this.list.push(val); // push a node to the front of the list
-  this.cache[key] = val; // add the node to the internal cache
-  this.size++; //increment counter
+  var item;
 
-  if( this.size > this.limit) { // if our size is greater than our limit
+  if( key in this._items ) { // set an existing item
+    item = this._items[key];
+    item.val = val;
+    this._ordering.moveToFront(item.node);
+  } else { // set a new item
+    if( this._size >= this.limit ) {
+      var oldest = this._ordering.pop();
+      delete this._items[oldest.key];
+      this._size = Math.max(0, this._size - 1);
+    }
+    this_size += 1;
 
-   // shift the first item in our list
-   // shift that particular item in our cache
-   // decrement counter
-
+    item = new LRUCacheItem(val, key);
+    item.node = this._ordering.unshift(item);
+    this._items[key] = item;
   }
 };
-
-
 
 var List = function () {
   this.head = null;
