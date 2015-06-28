@@ -31,7 +31,7 @@
  */
 
 var LRUCache = function (limit) {
-  this.items = {};
+  this._items = {};
   this._ordering = new List();
   this._limit = limit || 10000;
   this._size = 0;
@@ -48,32 +48,41 @@ LRUCache.prototype.size = function () {
 };
 
 LRUCache.prototype.get = function (key) {
-  if( !(key in this._items) ) { return null; }
+  if ( !(key in this._items) ) { return null; }
 
   var item = this._items[key];
-  this._ordering.moveToFront(item.node);
+  this.promote(item);
   return item.val;
 };
 
 LRUCache.prototype.set = function (key, val) {
   var item;
-
-  if( key in this._items ) { // set an existing item
+  if ( key in this._items ) {  // Set an existing item
     item = this._items[key];
     item.val = val;
-    this._ordering.moveToFront(item.node);
-  } else { // set a new item
-    if( this._size >= this.limit ) {
-      var oldest = this._ordering.pop();
-      delete this._items[oldest.key];
-      this._size = Math.max(0, this._size - 1);
-    }
-    this_size += 1;
+    this.promote(item);
+  } else {  // Set a new item
+    if ( this.full() ) { this.prune(); }  // Make space if necessary
+    this._size += 1;
 
     item = new LRUCacheItem(val, key);
     item.node = this._ordering.unshift(item);
     this._items[key] = item;
   }
+};
+
+LRUCache.prototype.full = function () {
+  return this._size >= this._limit;
+};
+
+LRUCache.prototype.prune = function () {
+  var oldest = this._ordering.pop();
+  delete this._items[oldest.key];
+  this._size = Math.max(0, this._size - 1);
+};
+
+LRUCache.prototype.promote = function (item) {
+  this._ordering.moveToFront(item.node);
 };
 
 var List = function () {
