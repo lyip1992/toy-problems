@@ -41,7 +41,7 @@ var makeHashTable = function(){
     for( var i = 0; i < bucket.length; i++ ) { // look for the key in that bucket
       var tuple = bucket[i];
       if( tuple[0] === key ) {
-        return value;
+        return tuple[1];
       }
     }
 
