@@ -15,6 +15,7 @@ var makeHashTable = function(){
     if( !bucket ) {  // is there even a bucket there
       bucket = [];
       bucket.push([ key, value ]);
+      storage[idx] = bucket;
       return;
     }
 
