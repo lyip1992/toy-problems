@@ -32,7 +32,7 @@ var makeHashTable = function(){
 
   result.retrieve = function(key) {
     var idx = getIndexBelowMaxForKey(key, storageLimit);
-    var bucket = tuple[idx];
+    var bucket = storage[idx];
 
     if( !bucket ) { // if there is no bucket there return nothing
       return null;
