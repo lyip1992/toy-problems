@@ -7,19 +7,64 @@ var makeHashTable = function(){
   var result = {};
   var storage = [];
   var storageLimit = 1000;
-  result.insert = function(/*...*/ 
-){
-    // TODO: implement `insert()`
+
+  result.insert = function(key, value) {
+    var idx = getIndexBelowMaxForKey(key, storageLimit);
+    var bucket = storage[idx];
+
+    if( !bucket ) {  // is there even a bucket there
+      bucket = [];
+      bucket.push([ key, value ]);
+      return;
+    }
+
+    for( var i = 0; i < bucket.length; i++ ) {  // if the key is already there, replace the value
+      var tuple = bucket[i];
+      if( tuple[0] === key) {
+        tuple[1] = value;
+        return;
+      }
+    }
+
+    bucket.push([ key, value ]);  // add the value into the hash table
+    return;
   };
 
-  result.retrieve = function(/*...*/ 
-){
-    // TODO: implement `retrieve()`
+  result.retrieve = function(key) {
+    var idx = getIndexBelowMaxForKey(key, storageLimit);
+    var bucket = tuple[idx];
+
+    if( !bucket ) { // if there is no bucket there return nothing
+      return null;
+    }
+
+    for( var i = 0; i < bucket.length; i++ ) { // look for the key in that bucket
+      var tuple = bucket[i];
+      if( tuple[0] === key ) {
+        return value;
+      }
+    }
+
+    return null; // if we don't find the key in the bucket, return null
   };
 
-  result.remove = function(/*...*/ 
-){
-    // TODO: implement `remove()`
+  result.remove = function(key) {
+    var idx = getIndexBelowMaxForKey(key, storageLimit);
+    var bucket = storage[idx];
+
+    if( !bucket ) { // if there isn't a bucket at that index, return null
+      return null;
+    }
+
+    for( var i = 0; i < bucket.length; i++ ) { // look for the key in that bucket
+      var tuple = bucket[i];
+      if( tuple[0] === key ) {  // if we find the key
+        var temp = bucket.splice(i, 1);  // splice that tuple out of the bucket
+        return temp[1]; // and return the value from that spliced tuple
+      }
+    }
+
+    return null; // if we don't find the key in the bucket, retrun null
   };
 
   return result;
