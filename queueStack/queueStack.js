@@ -17,8 +17,8 @@ Stack.prototype.push = function(item){ // add an item to the top of the stack
 };
 
 Stack.prototype.pop = function(){ // remove an item from the top of the stack
-  var temp = this._storage[this._size];
-  delete this._storage[this._size];
+  var temp = this._storage[this._size - 1];
+  delete this._storage[this._size - 1];
   this._size--;
   return temp;
 };
