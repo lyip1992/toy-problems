@@ -7,18 +7,24 @@
   * Stack Class
   */
 var Stack = function() {
+  this._storage = {};
+  this._size = 0;
+};
 
-  // add an item to the top of the stack
-  this.push = function(){
-  };
+Stack.prototype.push = function(item){ // add an item to the top of the stack
+  this._storage[this._size] = item;
+  this._size++;
+};
 
-  // remove an item from the top of the stack
-  this.pop = function(){
-  };
+Stack.prototype.pop = function(){ // remove an item from the top of the stack
+  var temp = this._storage[this._size];
+  delete this._storage[this._size];
+  this._size--;
+  return temp;
+};
 
-  // return the number of items in the stack
-  this.size = function(){
-  };
+Stack.prototype.size = function(){ // return the number of items in the stack
+  return this._size;
 };
 
 /**
@@ -26,21 +32,25 @@ var Stack = function() {
   */
 var Queue = function() {
   // Use two `stack` instances to implement your `queue` Class
-  var inbox = new Stack();
-  var outbox = new Stack();
+  this._inbox = new Stack();
+  this._outbox = new Stack();
+};
 
-  // called to add an item to the `queue`
-  this.enqueue = function(){
-    // TODO: implement `enqueue`
-  };
+Queue.prototype.enqueue = function(item){ // called to add an item to the `queue`
+  this._inbox.push(item);
+};
 
-  // called to remove an item from the `queue`
-  this.dequeue = function(){
-    // TODO: implement `dequeue`
-  };
+Queue.prototype.dequeue = function(){ // called to remove an item from the `queue`
+  if( !this._outbox.size() && this._inbox.size() ){
+    while( this._inbox.size() ){  // while inbox size is greater than 0
+      this._outbox.push(this._inbox.pop());  // pop item off inbox and put it into the outbox
+    }
+  }
 
-  // should return the number of items in the queue
-  this.size = function(){
-    // TODO: implement `size`
-  };
+  if( this._outbox.size() ){ return this._outbox.pop(); }  // if there's something in our outbox, pop it off
+  return null;  // else return null
+};
+
+Queue.prototype.size = function(){ // should return the number of items in the queue
+  return this._inbox.size() + this._outbox.size();
 };
