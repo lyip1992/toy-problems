@@ -12,7 +12,7 @@ var Stack = function() {
 };
 
 Stack.prototype.push = function(item){ // add an item to the top of the stack
-  this._storage[this._size++] = value;
+  this._storage[this._size++] = item;
 };
 
 Stack.prototype.pop = function(){ // remove an item from the top of the stack
