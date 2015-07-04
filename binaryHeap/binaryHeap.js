@@ -78,14 +78,48 @@ BinaryHeap.prototype.getRoot = function (){
 };
 
 // parentIndex = Math.floor( (index - 2) / 2 )
-// childrenIndices = [index * 2 + 1, index * 2 + 2]
 
 BinaryHeap.prototype.insert = function (value){
-  this._heap.push(value); // push a value to the end of the array
+  this._heap.push(value);
+  var idx = this._heap.length - 1;
+
+  while( this._compare(!idx && this._heap[idx], this._heap[Math.floor( (idx - 2) / 2 )]) ){
+    var temp = this._heap[idx];
+    this._heap[idx] = this._heap[Math.floor( (idx - 2) / 2 )];
+    this._heap[Math.floor( (idx - 2) / 2 )] = temp;
+    idx = Math.floor( (idx - 2) / 2 );
+  }
 };
 
-
+// childrenIndices = [index * 2 + 1, index * 2 + 2]
 
 BinaryHeap.prototype.removeRoot = function (){
-  // TODO: Your code here
+  if( this._heap.length ){
+    var lastElement = this._heap[this._heap.length - 1]; // cache the last element
+    this._heap[0] = lastElement; // set the first element equal to the cached last element
+    this._heap.pop(); // remove the last element in the array
+
+    var idx = 0;
+    while( this._heap[idx * 2 + 1] && this._heap[idx * 2 + 2] ){
+
+      var temp;
+      if( this._compare(this._heap[idx * 2 + 1], this._heap[idx]) ){ // if we are greater than the left node
+        temp = this._heap[idx];
+        this._heap[idx] = this._heap[idx * 2 + 1];
+        this._heap[idx * 2 + 1] = temp;
+        idx = idx * 2 + 1;
+        continue;
+      }
+
+      if( this._compare(this._heap[this._heap[idx * 2 + 2]], this.heap[idx]) ){ // if we are greater than the right node
+        temp = this._heap[idx];
+        this._heap[idx] = this._heap[idx * 2 + 2];
+        this._heap[idx * 2 + 2] = temp;
+        idx = idx * 2 + 2;
+        continue;
+      }
+
+      break;
+    }
+  }
 };
