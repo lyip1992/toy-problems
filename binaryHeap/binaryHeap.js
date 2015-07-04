@@ -77,21 +77,17 @@ BinaryHeap.prototype.getRoot = function (){
   return this._heap[0];
 };
 
-// parentIndex = Math.floor( (index - 2) / 2 )
-
 BinaryHeap.prototype.insert = function (value){
   this._heap.push(value);
   var idx = this._heap.length - 1;
 
-  while( this._compare(!idx && this._heap[idx], this._heap[Math.floor( (idx - 2) / 2 )]) ){
+  while( !idx && this._compare(this._heap[idx], this._heap[Math.floor( (idx - 2) / 2 )]) ){
     var temp = this._heap[idx];
     this._heap[idx] = this._heap[Math.floor( (idx - 2) / 2 )];
     this._heap[Math.floor( (idx - 2) / 2 )] = temp;
     idx = Math.floor( (idx - 2) / 2 );
   }
 };
-
-// childrenIndices = [index * 2 + 1, index * 2 + 2]
 
 BinaryHeap.prototype.removeRoot = function (){
   if( this._heap.length ){
