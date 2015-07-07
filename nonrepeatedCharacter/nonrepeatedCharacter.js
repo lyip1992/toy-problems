@@ -7,5 +7,21 @@
  */
 
 var firstNonRepeatedCharacter = function(string) {
-  // TODO: your solution here
+  var duplicateTracker = {};
+
+  for( var i = 0; i < string.length; i++ ){
+    if( duplicateTracker[string[i]] === undefined ){
+      duplicateTracker[string[i]] = true;
+    } else {
+      duplicateTracker[string[i]] = false;
+    }
+  }
+
+  for( var key in duplicateTracker ){
+    if( duplicateTracker[key] ){
+      return key;
+    }
+  }
+
+  return null;
 };
