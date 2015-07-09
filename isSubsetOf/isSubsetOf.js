@@ -3,7 +3,7 @@
  * subset of an input array.  To simplify the problem, you can assume that both
  * arrays will contain only strings.
  *
- * 
+ *
  * var a = ['commit','push']
  * a.isSubsetOf(['commit','rebase','push','blame']) // true
  *
@@ -11,7 +11,7 @@
  *
  * var b = ['merge','reset','reset']
  *
- * b.isSubsetOf(['reset','merge','add','commit']) // true 
+ * b.isSubsetOf(['reset','merge','add','commit']) // true
  *
  * See http://en.wikipedia.org/wiki/Subset for more on the definition of a
  * subset.
@@ -23,5 +23,20 @@
 */
 
 Array.prototype.isSubsetOf = function(array){
-  // Your code here
+  var tracker = {};
+  var isSubset = true;
+
+  for( var i = 0; i < this.length; i++ ){
+    tracker[this[i]] = true;
+  }
+
+  for( var j = 0; j < array.length; j++ ){
+    if( tracker[array[j]] ){ tracker[array[j]] = false; }
+  }
+
+  for( var key in tracker ){
+    if( tracker[key] ){ isSubset = false; }
+  }
+
+  return isSubset;
 };
