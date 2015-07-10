@@ -20,9 +20,15 @@
  *
  */
 
-var nthFibonacci = function (n) {
-  // TODO: implement me!
+var nthFibonacci = function(n, tracker, arr){
+  tracker = tracker || 0;
+  arr = arr || [];
+  if( tracker > n ) return arr[arr.length - 1];
+
+  if( tracker < 2 ) {
+    arr.push(tracker);
+  } else {
+    arr.push(arr[arr.length - 2] + arr[arr.length - 1]);
+  }
+  return nthFibonacci(n, ++tracker, arr);
 };
-
-
-
