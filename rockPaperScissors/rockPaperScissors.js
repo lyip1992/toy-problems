@@ -17,7 +17,26 @@
 *
 */
 
-var rockPaperScissors = function (
-) {
-  // TODO: your solution here
+var rockPaperScissors = function(rounds){ // refactor to eliminate subroutine
+  rounds = rounds || 3;
+  var outcomes = [];
+
+  var plays = ['rock', 'paper', 'scissors'];
+
+  var combos = function(roundsToGo, playedSoFar) {
+    if( roundsToGo === 0 ){
+      outcomes.push( playedSoFar );
+      return;
+    }
+
+    for( var i = 0; i < plays.length; i++ ){
+      var currentPlay = plays[i];
+      combos( roundsToGo-1, playedSoFar.concat(currentPlay) );
+    }
+  };
+  combos( rounds, [] );
+
+  return outcomes;
 };
+
+console.log(rockPaperScissors());
