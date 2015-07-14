@@ -11,5 +11,18 @@
  */
 
 var commonCharacters = function(string1, string2) {
-  // TODO: Your code here!
+  var results = {};
+  var stringResult = '';
+
+  for( var i = 0; i < string1.length; i++ ){
+    if( string1[i] !== ' ' && results[i] === undefined && string2.indexOf(string1[i]) !== -1 ){
+      results[string1[i]] = string1[i];
+    }
+  }
+
+  for( var key in results ){
+    stringResult += results[key];
+  }
+
+  return stringResult;
 };
