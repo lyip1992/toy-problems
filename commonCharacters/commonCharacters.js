@@ -10,13 +10,26 @@
  * Extra credit: Extend your function to handle more than two input strings.
  */
 
-var commonCharacters = function(string1, string2) {
+var commonCharacters = function(string) {
+  var strings = Array.prototype.slice.call(arguments, 1);
   var results = {};
   var stringResult = '';
 
-  for( var i = 0; i < string1.length; i++ ){
-    if( string1[i] !== ' ' && results[i] === undefined && string2.indexOf(string1[i]) !== -1 ){
-      results[string1[i]] = string1[i];
+  for( var i = 0; i < string.length; i++ ){
+    var yes = false;
+    var failed = false;
+
+    for( var j = 0; j < strings.length; j++ ){
+      if( string[i] !== ' ' && results[i] === undefined && strings[j].indexOf(string[i]) !== -1 ){
+        yes = true;
+      } else {
+        yes = false;
+        failed = true;
+      }
+    }
+
+    if( yes && !failed ){
+      results[string[i]] = string[i];
     }
   }
 
