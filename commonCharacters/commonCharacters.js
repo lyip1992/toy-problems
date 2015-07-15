@@ -10,7 +10,7 @@
  * Extra credit: Extend your function to handle more than two input strings.
  */
 
-var commonCharacters = function(string) { // redo this, hashtable does not preserve order
+var commonCharacters = function(string) {
   var objectifiedString = objectify(string);
   var otherStrings = Array.prototype.slice.call(arguments, 1);
   var result = '';
