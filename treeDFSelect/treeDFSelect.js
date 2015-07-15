@@ -39,17 +39,18 @@ Tree.prototype.DFSelect = function(filter) {
   var result = [];
   var depth = 0;
 
-  var recurse = function(filter, depth){
-    if( filter(this.value, depth) ) result.push(this.value);
+  var recurse = function(current, depth){
+    if( filter(current.value, depth) ) result.push(current.value);
 
-    if( this.children ){
-      for( var i = 0; i < this.children.length; i++ ){
-        recurse(this.children[i], ++depth);
-      } 
+    if( current.children ){
+      depth++;
+      for( var i = 0; i < current.children.length; i++ ){
+        recurse(current.children[i], depth);
+      }
     }
   };
 
-  recurse(filter, depth);
+  recurse(this, depth);
   return result;
 };
 
@@ -116,13 +117,3 @@ var leaf4 = branch2.addChild(4);
 var leaf5 = branch2.addChild(5);
 var leaf6 = branch3.addChild(6);
 var leaf7 = branch3.addChild(7);
-
-console.log(root1.DFSelect(function (value, depth) {
- return value % 2;
-}));
-// [1, 5, 3, 7]
-
-// root1.DFSelect(function (value, depth) {
-//  return depth === 1;
-// })
-// ``// [2, 3]
