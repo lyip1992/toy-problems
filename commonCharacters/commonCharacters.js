@@ -10,32 +10,36 @@
  * Extra credit: Extend your function to handle more than two input strings.
  */
 
-var commonCharacters = function(string) {
-  var strings = Array.prototype.slice.call(arguments, 1);
-  var results = {};
-  var stringResult = '';
+var commonCharacters = function(string) { // redo this, hashtable does not preserve order
+  var objectifiedString = objectify(string);
+  var otherStrings = Array.prototype.slice.call(arguments, 1);
+  var result = '';
 
-  for( var i = 0; i < string.length; i++ ){
-    var yes = false;
-    var failed = false;
-
-    for( var j = 0; j < strings.length; j++ ){
-      if( string[i] !== ' ' && results[i] === undefined && strings[j].indexOf(string[i]) !== -1 ){
-        yes = true;
-      } else {
-        yes = false;
-        failed = true;
+  for( var j = 0; j < otherStrings.length; j++ ){
+    for( var i = 0; i < string.length; i++ ){
+      if( otherStrings[j].indexOf(string[i]) === -1 ){
+        objectifiedString[string[i]] = false;
       }
     }
+  }
 
-    if( yes && !failed ){
-      results[string[i]] = string[i];
+  for( var k = 0; k < string.length; k++ ){
+    if( objectifiedString[string[k]] ){
+      result += string[k];
     }
   }
 
-  for( var key in results ){
-    stringResult += results[key];
+  return result;
+};
+
+var objectify = function(string){
+  var obj = {};
+
+  for( var i = 0; i < string.length; i++ ){
+    if( string[i] !== ' ' ){
+      obj[string[i]] = true;
+    }
   }
 
-  return stringResult;
+  return obj;
 };
