@@ -14,11 +14,20 @@ var largestProductOfThree = function(array){
     return a - b;
   });
 
-  var result = sortedArray[array.length - 1];
+  var result1 = sortedArray[array.length - 1];
+  var result2 = result1;
 
   for( var i = array.length - 2; i > array.length - 4; i-- ){
-    result *= sortedArray[i];
+    if( sortedArray[i] !== undefined ){
+      result1 *= sortedArray[i];
+    }
   }
 
-  return result;
+  for( var j = 0; j < 2; j++ ){
+    if( sortedArray[j] !== undefined ){
+      result2 *= sortedArray[j];
+    }
+  }
+
+  return result1 >= result2 ? result1 : result2;
 };
