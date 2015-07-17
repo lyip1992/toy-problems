@@ -12,4 +12,5 @@
   *
   */
 var deepEquals = function(apple, orange){
+  return JSON.stringify(apple) === JSON.stringify(orange);
 };
