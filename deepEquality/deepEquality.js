@@ -12,5 +12,15 @@
   *
   */
 var deepEquals = function(apple, orange){
-  return JSON.stringify(apple) === JSON.stringify(orange);
+  var test = {};
+
+  for( var key1 in apple ){
+    test[key1] = apple[key1];
+  }
+
+  for( var key2 in orange ){
+    test[key2] = orange[key2];
+  }
+
+  return JSON.stringify(test) === JSON.stringify(apple);
 };
