@@ -6,7 +6,10 @@ $(function(){
   // HINT: the `split` array method is your friend
 
   // TODO: your code here!
-
+  var tags = $('p');
+  tags.each(function(tag){
+    console.log($(this));
+  })
 
   // --------------STEP 2--------------
   // Next, change spans to random colors, once per second
