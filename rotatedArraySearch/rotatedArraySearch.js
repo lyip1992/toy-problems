@@ -15,7 +15,28 @@
  * Target time complexity: O(log(array.length))
  */
 
-var rotatedArraySearch = function (rotated, target) {
-  // Your code here:
-};
+var rotatedArraySearch = function(rotated, target){
+  var x = rotated[0];
 
+  if( target % 2 === 0 ){
+    if( target > rotated[Math.floor(rotated.length / 2 - 1)] || target < rotated[Math.floor(rotated.length / 2)] ){
+      return null;
+    } else {
+      if( target >= x ){
+        return target - x;
+      } else {
+        return target + x;
+      }
+    }
+  } else {
+    if( target > rotated[rotated.length / 2 - 1] || target < rotated[rotated.length / 2]){
+      return null;
+    } else {
+      if( target >= x ){
+        return target - x;
+      } else {
+        return target + x - 1;
+      }
+    }
+  }
+};
