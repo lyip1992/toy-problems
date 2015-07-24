@@ -37,13 +37,13 @@ var compose = function(){
   var args = Array.prototype.slice.call(arguments);
 
   return function(){
-    var current = args[args.length].apply(null, arguments);
+    var top = args[args.length - 1];
 
-    for( var i = args.length - 2; i > -1; i++ ){
-      current = current(args[i]);
+    for( var i = args.length - 2; i > 0; i++ ){
+      top = top(args[i]);
     }
 
-    return current;
+    return top(args[0].apply(null, arguments));
   };
 
 };
