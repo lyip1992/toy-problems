@@ -34,7 +34,21 @@
 'use strict';
 
 var compose = function(){
+  var args = Array.prototype.slice.call(arguments);
 
+  return function(){
+    var current = args[args.length].apply(null, arguments);
+
+    for( var i = args.length - 2; i > -1; i++ ){
+      current = current(args[i]);
+    }
+
+    return current;
+  };
+
+};
+
+var pipe = function(){
   var args = Array.prototype.slice.call(arguments);
 
   return function(){
@@ -47,7 +61,4 @@ var compose = function(){
     return current;
   };
 
-};
-
-var pipe = function(){
 };
