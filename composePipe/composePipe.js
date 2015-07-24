@@ -35,30 +35,22 @@
 
 var compose = function(){
   var args = Array.prototype.slice.call(arguments);
-
   return function(){
-    var top = args[args.length - 1];
-
-    for( var i = args.length - 2; i > 0; i++ ){
-      top = top(args[i]);
+    var current = args[args.length - 1].apply(null, arguments);
+    for( var i = args.length - 2; i > -1; i-- ){
+      current = args[i](current);
     }
-
-    return top(args[0].apply(null, arguments));
+    return current;
   };
-
 };
 
 var pipe = function(){
   var args = Array.prototype.slice.call(arguments);
-
   return function(){
     var current = args[0].apply(null, arguments);
-
     for( var i = 1; i < args.length; i++ ){
       current = args[i](current);
     }
-
     return current;
   };
-
 };
