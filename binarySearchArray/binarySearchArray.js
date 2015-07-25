@@ -9,16 +9,12 @@
  */
 
 var binarySearch = function(array, target, current){
-
   current = current || 0;
   var midpoint = Math.floor(array.length / 2);
 
   if( array.length === 1 ){
-    if( array[0] === target ){
-      return current;
-    } else {
-      return null;
-    }
+    if( array[0] === target ){ return current; }
+    else { return null; }
   }
 
   if( array[midpoint] === target ){
@@ -28,5 +24,4 @@ var binarySearch = function(array, target, current){
   } else {
     return binarySearch(array.slice(midpoint), target, current + midpoint);
   }
-
 };
