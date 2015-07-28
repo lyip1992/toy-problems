@@ -45,7 +45,12 @@ var Range = function(start, end, step) {
   } else {
     this.start = null;
   }
-  this.end = end || start;
+
+  if( end !== undefined ){
+    this.end = end;
+  } else {
+    this.end = start;
+  }
 
   this.step = step || 1;
 };
@@ -65,7 +70,7 @@ Range.prototype.size = function(){
   if( start !== null && end !== start ){ // if the start and end value exist
     if( start > end ){ // if the start value is greater than the end value
       while( start >= end ){
-        start -= step;
+        start += step;
         counter++
       }
       return counter;
@@ -92,7 +97,7 @@ Range.prototype.each = function(callback){
     if( start > end ){
       while( start >= end ){
         callback(start);
-        start -= step;
+        start += step;
       }
       return;
     } else if( start < end ){
@@ -119,7 +124,7 @@ Range.prototype.includes = function(val){
     if( start > end ){
       while( start >= end ){
         if( start === val ){ tracker = true; }
-        start -= step;
+        start += step;
       }
       return tracker;
     } else if( start < end ){
@@ -131,14 +136,3 @@ Range.prototype.includes = function(val){
     }
   }
 };
-
-
-var evenNumbers = new Range(2,8,2); // A range with the even numbers 2, 4, 6, and 8.
-evenNumbers.each(function(val){
-  console.log(val+"!");
-});
-console.log("Who do we appreciate!?");
-
-evenNumbers.size();
-evenNumbers.includes(2);
-evenNumbers.includes(3);
