@@ -24,6 +24,16 @@
  *
  */
 var balancedParens = function(input){
+  var leftParenCounter = 0;
+  var rightParenCounter = 0;
+
+  for( var i = 0; i < Math.floor(input.length / 2) + 1; i++ ){
+    if( input[i] === '(' ){ leftParenCounter++; }
+  }
+
+  for( var j = input.length - 1; j > Math.floor(input.length / 2) - 1; j-- ){
+    if( input[j] === ')' ){ rightParenCounter++; }
+  }
+
+  return leftParenCounter === rightParenCounter;
 };
-
-
