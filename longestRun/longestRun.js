@@ -13,6 +13,8 @@
  */
 
 var longestRun = function(string){
+  if( string.length === 0 ){ return [ 0, 0 ]; }
+
   var overallCount = 0;
   var overallIndex1, overallIndex2;
   var count = 0;
