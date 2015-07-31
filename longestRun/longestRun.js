@@ -59,3 +59,5 @@ var randomString = function (len) {
 
   return text;
 };
+
+console.log(longestRun(20));
