@@ -23,17 +23,44 @@
  *
  *
  */
+
+ // brackets can either have nothing inside of them
+ // or they need an even amount of brackets inside of them
+ // we are going to need three different for loops to check for brackets
+
+ // in step 3 all i need to do is to trim out all of the white space
+
 var balancedParens = function(input){
-  var leftParenCounter = 0;
-  var rightParenCounter = 0;
+  var stack = [];
+  var pairs = {
+    '{': '}',
+    '[': ']',
+    '(': ')'
+  };
 
-  for( var i = 0; i < Math.floor(input.length / 2) + 1; i++ ){
-    if( input[i] === '(' ){ leftParenCounter++; }
+  for( var i = 0; i < input.length; i++ ){
+    var char = input[i];
+
+    if( pairs[char] ){
+      stack.push(char);
+    } else if( char === '}' || char === ']' || char === ')' ){
+      if( pairs[stack.pop()] !== char ){
+        return false;
+      }
+    }
   }
 
-  for( var j = input.length - 1; j > Math.floor(input.length / 2) - 1; j-- ){
-    if( input[j] === ')' ){ rightParenCounter++; }
-  }
-
-  return leftParenCounter === rightParenCounter;
+  return stack.length === 0;
 };
+
+console.log(balancedParens('('));  // false
+console.log(balancedParens('()')); // true
+console.log(balancedParens(')('));  // false
+console.log(balancedParens('(())'));  // true
+
+console.log(balancedParens('[](){}')); // true
+console.log(balancedParens('[({})]'));   // true
+console.log(balancedParens('[(]{)}')); // false
+
+console.log(balancedParens(' var wow  = { yo: thisIsAwesome() }')); // true
+console.log(balancedParens(' var hubble = function() { telescopes.awesome();')); // false
