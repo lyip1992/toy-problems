@@ -12,8 +12,37 @@
  * inputs well.
  */
 
-var longestRun = function (string) {
-  // TODO: Your code here!
+var longestRun = function(string){
+  var overallCount = 0;
+  var overallIndex1, overallIndex2;
+  var count = 0;
+  var current, index1, index2;
+
+  for( var i = 0; i < string.length; i++ ){
+    var char = string[i];
+
+    if( char !== current ){
+      if( count > overallCount ){
+        overallCount = count;
+        overallIndex1 = index1;
+        overallIndex2 = index2;
+        index1 = i;
+        index2 = i;
+        count = 1;
+        current = char;
+      } else {
+        index1 = i;
+        index2 = i;
+        count = 1;
+        current = char;
+      }
+    } else {
+      count++;
+      index2 = i;
+    }
+  }
+
+  return [ overallIndex1, overallIndex2 ];
 };
 
 // If you need a random string generator, use this!
