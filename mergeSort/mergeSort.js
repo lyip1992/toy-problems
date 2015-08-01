@@ -98,5 +98,16 @@
 
 
 var mergeSort = function(array) {
-  // Your code here.
+  // if array length is not equal to 1
+    // then split
+  // otherwise
+    // sort and return
+
+  if( array.length !== 1 ){
+    return mergeSort(array.slice(Math.floor(array.length / 2) + 1))
+      .concat(mergeSort(array.slice(Math.floor(array.length / 2), array.length)));
+  } else {
+
+  }
+  
 };
