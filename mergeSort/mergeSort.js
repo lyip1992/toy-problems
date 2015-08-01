@@ -98,16 +98,22 @@
 
 
 var mergeSort = function(array) {
-  // if array length is not equal to 1
-    // then split
-  // otherwise
-    // sort and return
 
-  if( array.length !== 1 ){
+  if( array.length > 2 ){
     return mergeSort(array.slice(Math.floor(array.length / 2) + 1))
       .concat(mergeSort(array.slice(Math.floor(array.length / 2), array.length)));
   } else {
-
+    if( array.length === 2 ){
+      if( array[0] > array[1] ){
+        return [ array[1], array[0] ];
+      } else {
+        return array;
+      }
+    } else if( array.length === 1 ){
+      return array;
+    }
   }
-  
+
 };
+
+console.log(mergeSort([4, 7, 4, 3, 9, 1, 2]));
