@@ -100,20 +100,28 @@
 var mergeSort = function(array) {
 
   if( array.length > 2 ){
-    return mergeSort(array.slice(Math.floor(array.length / 2) + 1))
-      .concat(mergeSort(array.slice(Math.floor(array.length / 2), array.length)));
+    var firstHalf = mergeSort(array.slice(0, Math.floor(array.length / 2)));
+    var secondHalf = mergeSort(array.slice(Math.floor(array.length / 2)));
+    return merge(firstHalf, secondHalf);
   } else {
-    if( array.length === 2 ){
-      if( array[0] > array[1] ){
-        return [ array[1], array[0] ];
-      } else {
-        return array;
-      }
-    } else if( array.length === 1 ){
+    if( array.length > 1 ){
+      return array[0] >= array[1] ? [ array[1], array[0] ] : array;
+    } else {
       return array;
     }
   }
-
 };
 
-console.log(mergeSort([4, 7, 4, 3, 9, 1, 2]));
+var merge = function(first, second){
+  var res = [];
+  var i = 0, j = 0;
+
+  while( i < first.length || j < second.length ){
+    if( second[j] >= first[i] || !second[j] ){
+      res.push(first[i++]);
+    } else {
+      res.push(second[j++]);
+    }
+  }
+  return res;
+};
