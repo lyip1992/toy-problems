@@ -13,27 +13,15 @@
   */
 
 var allAnagrams = function(string) {
+  var uniqueOutput = {};
+  generator('', string, uniqueOutput);
+  return Object.keys(uniqueOutput);
+};
 
-  var dictionary = {};
-  var stringSet;
+var generator = function(ana, str, uniqueOutput){
+  if (str === '') { uniqueOutput[ana] = 1; }
 
-  for( var i = 0; i < string.length; i++ ) {
-    var temp = stringSet[0];
-    stringSet[0] = stringSet[i];
-    stringSet[i] = temp;
-    dictionary[stringSet] = stringSet;
+  for (var i = 0; i < str.length; i++) {
+    generator(ana + str[i], str.slice(0, i) + str.slice(i + 1), uniqueOutput);
   }
-
-  
-
-  // spliceString = spliceString || string;
-  // var result = [];
-  // var anagrams = [];
-  //
-  // for( var i = 0; i < spliceString.length; i++ ) {
-  //   anagrams.push(spliceString[i]);
-  //   result.concat(allAnagrams(string, spliceString.splice(i, 1)));
-  // }
-  //
-  // return result;
 };
