@@ -98,6 +98,7 @@
 
 
 var mergeSort = function(array) {
+<<<<<<< HEAD
 
   if( array.length > 2 ){
     var firstHalf = mergeSort(array.slice(0, Math.floor(array.length / 2)));
@@ -125,3 +126,7 @@ var merge = function(first, second){
   }
   return res;
 };
+=======
+  // Your code here.
+};
+>>>>>>> efce143e0b2aef3747c439300f499759ae0b6598
