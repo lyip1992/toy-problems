@@ -44,6 +44,7 @@
  */
 
 var rotateMatrix = function(matrix, direction){
+  if( matrix.length === 0 ){ return []; }
   direction = direction || 1;
   var rotatedMatrix = [];
   var row;
