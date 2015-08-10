@@ -30,15 +30,45 @@
  * Basic tree that stores a value.
  */
 
+var Queue = function(){
+  this._storage = [];
+};
+
+Queue.prototype.push = function(item){
+  this._storage.push(item);
+};
+
+Queue.prototype.dequeue = function(){
+  return this._storage.shift();
+};
+
 var Tree = function(value){
   this.value = value;
   this.children = [];
 };
 
-
-
 Tree.prototype.BFSelect = function(filter) {
-  // return an array of values for which the function filter(value, depth) returns true
+
+  var queue = new Queue();
+  var results = [];
+  queue.push({ tree: this, depth: 0 });
+  var item, tree, depth, child;
+
+  while( item = queue.dequeue() ){
+    tree = item.tree;
+    depth = item.depth;
+
+    if( filter(tree.value, depth) ){
+      results.push(tree.value);
+    }
+
+    for( var i = 0; i < tree.children.length; i++ ){
+      child = tree.children[i];
+      queue.push({ tree: child, depth: depth + 1 });
+    }
+  }
+
+  return results;
 };
 
 /**
