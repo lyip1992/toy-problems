@@ -63,7 +63,7 @@ Tree.prototype.getClosestCommonAncestor = function(firstChild, secondChild){
   * 3.) me.getAncestorPath(me) -> [me]
   * 4.) grandma.getAncestorPath(H R Giger) -> null
   */
-Tree.prototype.getAncestorPath = function(person){
+Tree.prototype.getAncestorPath = function(person, ancestors){
   ancestors = ancestors || [];
 
   if( this === child ){
