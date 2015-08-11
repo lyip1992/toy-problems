@@ -38,10 +38,22 @@ Tree.prototype.addChild = function(child){
   *  3.) between my grandma and my grandma -> my grandma
   *  4.) between me and a potato -> null
   */
-Tree.prototype.getClosestCommonAncestor = function(/*...*/
-){
-  // TODO: implement me!
-}
+Tree.prototype.getClosestCommonAncestor = function(firstChild, secondChild){
+
+  var firstPath = this.getAncestorPath(firstChild);
+  if( !firstPath ){ return null; }
+
+  var secondPath = this.getAncestorPath(secondChild);
+  if( !secondPath ){ return null; }
+
+  var length = Math.min(firstPath.length, secondPath.length);
+  var closestCommonAncestor = this;
+  for( var i = 0; i < length; i++ ){
+    if( firstPath[i] === secondPath[i] ){ closestCommonAncestor = firstPath[i]; }
+  }
+
+  return closestCommonAncestor;
+};
 
 /**
   * should return the ancestral path of a child to this node.
@@ -52,17 +64,20 @@ Tree.prototype.getClosestCommonAncestor = function(/*...*/
   * 4.) grandma.getAncestorPath(H R Giger) -> null
   */
 Tree.prototype.getAncestorPath = function(person){
-  var result = [];
+  ancestors = ancestors || [];
 
-  if( this.isDescendant(person) ) {
-    result.push(this);
+  if( this === child ){
+    ancestors.unshift(this);
+    return ancestors;
   }
 
-  for( var i = 0; i < this.children.length; i++ ) {
-    result.concat(this.children[i].getAncestorPath(person));
+  for( var i = 0; i < this.children.length; i++ ){
+    if( this.children[i].getClosestCommonAncestor(child, ancestors) ){
+      ancestors.unshift(this);
+      return ancestors;
+    }
   }
-
-  return result;
+  return null;
 };
 
 /**
