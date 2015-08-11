@@ -72,7 +72,7 @@ Tree.prototype.getAncestorPath = function(person, ancestors){
   }
 
   for( var i = 0; i < this.children.length; i++ ){
-    if( this.children[i].getClosestCommonAncestor(child, ancestors) ){
+    if( this.children[i].getAncestorPath(child, ancestors) ){
       ancestors.unshift(this);
       return ancestors;
     }
