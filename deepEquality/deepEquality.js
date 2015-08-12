@@ -20,7 +20,7 @@ var deepEquals = function(apple, orange){
   if( appleKeys.length !== orangeKeys.length ){ return false; }
   if( appleKeys.length === 0 ){ return true; }
   for( var i = 0; i < appleKeys.length; i++ ){
-    if( !deepEquals(apple[appleKeys[i]], orange[orangeKeys[i]]) ){ return false; }
+    if( !deepEquals(apple[appleKeys[i]], orange[appleKeys[i]]) ){ return false; }
   }
   return true;
 };
