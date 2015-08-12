@@ -12,15 +12,15 @@
   *
   */
 var deepEquals = function(apple, orange){
-  var test = {};
-
-  for( var key1 in apple ){
-    test[key1] = apple[key1];
+  if( apple === orange ){ return true; }
+  if( apple && !orange || !apple && orange ){ return false; }
+  if( !(apple instanceof Object) || !(orange instanceof Object) ){ return false; }
+  var appleKeys = Object.keys(apple);
+  var orangeKeys = Object.keys(orange);
+  if( appleKeys.length !== orangeKeys.length ){ return false; }
+  if( appleKeys.length === 0 ){ return true; }
+  for( var i = 0; i < appleKeys.length; i++ ){
+    if( !deepEquals(apple[appleKeys[i]], orange[orangeKeys[i]]) ){ return false; }
   }
-
-  for( var key2 in orange ){
-    test[key2] = orange[key2];
-  }
-
-  return JSON.stringify(test) === JSON.stringify(apple);
+  return true;
 };
