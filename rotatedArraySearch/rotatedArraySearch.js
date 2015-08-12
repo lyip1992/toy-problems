@@ -16,27 +16,28 @@
  */
 
 var rotatedArraySearch = function(rotated, target){
-  var x = rotated[0];
+  var left = 0;
+  var right = rotated.length - 1;
 
-  if( target % 2 === 0 ){
-    if( target > rotated[Math.floor(rotated.length / 2 - 1)] || target < rotated[Math.floor(rotated.length / 2)] ){
-      return null;
-    } else {
-      if( target >= x ){
-        return target - x;
+  while( left <= right ){
+    var middle = Math.floor((left + right) / 2);
+
+    if( rotated[middle] === target ){ return middle; }
+
+    if( rotated[left] <= rotated[middle] ){
+      if( rotated[left] <= target && target < rotated[middle] ){
+        right = middle - 1;
       } else {
-        return target + x;
+        left = middle + 1;
       }
-    }
-  } else {
-    if( target > rotated[rotated.length / 2 - 1] || target < rotated[rotated.length / 2]){
-      return null;
     } else {
-      if( target >= x ){
-        return target - x;
+      if( rotated[middle] < target && target <= rotated[right] ){
+        left = middle + 1;
       } else {
-        return target + x - 1;
+        right = middle - 1;
       }
     }
   }
+
+  return null;
 };
