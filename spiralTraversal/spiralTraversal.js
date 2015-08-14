@@ -14,20 +14,38 @@
     returns [1, 2, 3, 6, 9, 8, 7, 4, 5]
  */
 
-var spiralTraversal = function(matrix) {
-  var result = [];
+var spiralTraversal = function(matrix){
+  var results = [];
+  var startRowIndex = 0;
+  var endRowIndex = matrix.length - 1;
+  var startColIndex = 0;
+  var endColIndex = matrix[0].length - 1;
 
-  for( var i = 0; i < iterations.length * 2; i++ ) {
-    
+  while( startRowIndex <= endRowIndex && startColIndex <= endRowIndex ){
+    for( var i = startColIndex; i <= endColIndex; i++ ){
+      results.push(matrix[startRowIndex][i]);
+    }
+    startRowIndex++;
 
+    for( var j = startRowIndex; j <= endRowIndex; j++ ){
+      results.push(matrix[j][endColIndex]);
+    }
+    endColIndex--;
+
+    if( startRowIndex <= endRowIndex ){
+      for( var k = endColIndex; k >= startColIndex; k-- ){
+        results.push(matrix[endRowIndex][k]);
+      }
+      endRowIndex--;
+    }
+
+    if( startColIndex <= endColIndex ){
+      for( var m = endRowIndex; m >= startRowIndex; m-- ){
+        results.push(matrix[m][startColIndex]);
+      }
+      startColIndex++;
+    }
   }
 
-
+  return results;
 };
-
-
-// 1 x 1 gives 1 || 1
-// 2 x 2 gives 3 || 4
-// 3 x 3 gives 5 || 9
-// 4 x 4 gives 7 || 16
-// 5 x 5 gives 9 || 25
