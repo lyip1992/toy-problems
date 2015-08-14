@@ -21,7 +21,7 @@ var spiralTraversal = function(matrix){
   var startColIndex = 0;
   var endColIndex = matrix[0].length - 1;
 
-  while( startRowIndex <= endRowIndex && startColIndex <= endRowIndex ){
+  while( startRowIndex <= endRowIndex && startColIndex <= endColIndex ){
     for( var i = startColIndex; i <= endColIndex; i++ ){
       results.push(matrix[startRowIndex][i]);
     }
