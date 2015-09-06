@@ -12,13 +12,13 @@
   * console.log(anagrams); // [ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba' ]
   */
 
-var anagrams = function(str, ana, output){
+var allAnagrams = function(str, ana, output){
   output = output || {};
   ana = ana || '';
 
   if( str === '' ){ output[ana] = 1; }
   for( var i = 0; i < str.length; i++ ){
-    anagrams(str.slice(0, i) + str.slice(i + 1), ana + str[i], output);
+    allAnagrams(str.slice(0, i) + str.slice(i + 1), ana + str[i], output);
   }
 
   return Object.keys(output);
