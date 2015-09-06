@@ -12,16 +12,14 @@
   * console.log(anagrams); // [ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba' ]
   */
 
-var allAnagrams = function(string) {
-  var uniqueOutput = {};
-  generator('', string, uniqueOutput);
-  return Object.keys(uniqueOutput);
-};
+var anagrams = function(str, ana, output){
+  output = output || {};
+  ana = ana || '';
 
-var generator = function(ana, str, uniqueOutput){
-  if (str === '') { uniqueOutput[ana] = 1; }
-
-  for (var i = 0; i < str.length; i++) {
-    generator(ana + str[i], str.slice(0, i) + str.slice(i + 1), uniqueOutput);
+  if( str === '' ){ output[ana] = 1; }
+  for( var i = 0; i < str.length; i++ ){
+    anagrams(str.slice(0, i) + str.slice(i + 1), ana + str[i], output);
   }
+
+  return Object.keys(output);
 };
