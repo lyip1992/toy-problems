@@ -17,26 +17,19 @@
 *
 */
 
-var rockPaperScissors = function(rounds){ // refactor to eliminate subroutine
-  rounds = rounds || 3;
-  var outcomes = [];
+var rockPaperScissors = function(n, results, round) {
+  results = results || [];
+  round = round || [];
+  var choices = ['rock', 'paper', 'scissors'];
 
-  var plays = ['rock', 'paper', 'scissors'];
+  if( n === 0 ){
+    return results.push(round.slice());
+  }
 
-  var combos = function(roundsToGo, playedSoFar) {
-    if( roundsToGo === 0 ){
-      outcomes.push( playedSoFar );
-      return;
-    }
-
-    for( var i = 0; i < plays.length; i++ ){
-      var currentPlay = plays[i];
-      combos( roundsToGo-1, playedSoFar.concat(currentPlay) );
-    }
-  };
-  combos( rounds, [] );
-
-  return outcomes;
+  for( var i = 0; i < 3; i++ ){
+    round.push(choices[i]);
+    rockPaperScissors(n - 1, results, round);
+    round.pop();
+  }
+  return results;
 };
-
-console.log(rockPaperScissors());
