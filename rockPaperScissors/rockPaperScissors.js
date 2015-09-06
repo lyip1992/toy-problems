@@ -18,9 +18,10 @@
 */
 
 var rockPaperScissors = function(n, results, round) {
+  if( n === undefined ){ n = 3; }
   results = results || [];
   round = round || [];
-  var choices = ['rock', 'paper', 'scissors'];
+  var choices = [ 'rock', 'paper', 'scissors' ];
 
   if( n === 0 ){
     return results.push(round.slice());
