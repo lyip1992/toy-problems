@@ -52,15 +52,3 @@ var balancedParens = function(input){
 
   return stack.length === 0;
 };
-
-console.log(balancedParens('('));  // false
-console.log(balancedParens('()')); // true
-console.log(balancedParens(')('));  // false
-console.log(balancedParens('(())'));  // true
-
-console.log(balancedParens('[](){}')); // true
-console.log(balancedParens('[({})]'));   // true
-console.log(balancedParens('[(]{)}')); // false
-
-console.log(balancedParens(' var wow  = { yo: thisIsAwesome() }')); // true
-console.log(balancedParens(' var hubble = function() { telescopes.awesome();')); // false
