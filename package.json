@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "Toy Problems ============ Welcome to Toy Problems.",
   "dependencies": {
-    "chai": "^3.3.0",
-    "should": "^7.1.0"
+    "chai": "^3.3.0"
   },
   "devDependencies": {},
   "scripts": {
