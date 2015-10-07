@@ -2,7 +2,9 @@
   "name": "toy-problems",
   "version": "1.0.0",
   "description": "Toy Problems ============ Welcome to Toy Problems.",
-  "dependencies": {},
+  "dependencies": {
+    "should": "^7.1.0"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
