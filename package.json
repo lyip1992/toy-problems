@@ -1,0 +1,21 @@
+{
+  "name": "toy-problems",
+  "version": "1.0.0",
+  "description": "Toy Problems ============ Welcome to Toy Problems.",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lyip1992/toy-problems.git"
+  },
+  "author": "Leon Yip",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lyip1992/toy-problems/issues"
+  },
+  "homepage": "https://github.com/lyip1992/toy-problems#readme"
+}
