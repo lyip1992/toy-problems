@@ -18,9 +18,40 @@
  */
 
 var powerSet = function(str){
-  // find all unsorted subsets
+  var set = [];
+  var hash = {};
+  if( !str ){
+    str = '';
+  }
+  str = str.split('').sort();
 
-  // sort
+  for( var i = 1; i < str.length; i++ ){ // remove duplicates
+    if( str[i - 1] === str[i] ){
+      str.splice(i, 1);
+      i--;
+    }
+  }
 
-  // return the powerset
+  var recurse = function(strSet){ // recursive through the sub sets
+    var joined = strSet.join('');
+
+    if( hash[joined] ){ // check if we have visited this combo
+      return;
+    }
+    hash[joined] = true;
+    set.push(joined);
+
+    if( strSet.length === 1 ){   // don't recurse to empty set - add it once at the end
+      return;
+    }
+
+    for( var i = 0; i < strSet.length; i++ ){ // recurse all subsets
+      var subSet = strSet.slice(0, i).concat(strSet.slice(i + 1));
+        recurse(subSet);
+      }
+  };
+  recurse(str);
+  set.push(''); // the power set, by definition, includes the empty set
+
+  return set;
 };
