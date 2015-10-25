@@ -39,100 +39,44 @@
  */
 
 
-var Range = function(start, end, step) {
-  if( start !== undefined ){
-    this.start = start;
-  } else {
-    this.start = null;
+ var Range = function(start, end, step){
+  if (start === undefined) {
+    return null;
   }
 
-  if( end !== undefined ){
+  this.start = start;
+
+  if( end === undefined ){
+    this.end = this.start;
+  } else {
     this.end = end;
-  } else {
-    this.end = start;
   }
 
-  this.step = step || 1;
+  if( step === undefined ){
+    this.step = (this.start < this.end) ? 1 : -1;
+  } else {
+    this.step = step;
+  }
+
+  return this;
 };
 
 Range.prototype.size = function(){
-  var start = this.start;
-  var end = this.end;
-  var step = this.step;
-  var counter = 0;
-
-  // if the start value doesn't exist
-  if( start === null ){ return null; }
-
-  // if the start value exists but the end value doesn't exist
-  if( start !== null && end === start ){ return 1; }
-
-  if( start !== null && end !== start ){ // if the start and end value exist
-    if( start > end ){ // if the start value is greater than the end value
-      while( start >= end ){
-        start += step;
-        counter++
-      }
-      return counter;
-    } else if( start < end ){ // if the start value is less than the end value
-      while( start <= end ){
-        end -= step;
-        counter++;
-      }
-      return counter;
-    }
-  }
+  return Math.floor((this.end - this.start) / this.step) + 1;
 };
 
 Range.prototype.each = function(callback){
-  var start = this.start;
-  var end = this.end;
-  var step = this.step;
-
-  if( start === null ){ return null; }
-
-  if( start !== null && end === start ){ return callback(start); }
-
-  if( start !== null && end !== start ){
-    if( start > end ){
-      while( start >= end ){
-        callback(start);
-        start += step;
-      }
-      return;
-    } else if( start < end ){
-      while( start <= end ){
-        callback(end);
-        end -= step;
-      }
-      return;
+  if( this.step > 0 ){
+    for( var i = this.start; i <= this.end; i += this.step ){
+      callback(i);
+    }
+  } else {
+    for( var j = this.start; j >= this.end; j += this.step ){
+      callback(j);
     }
   }
 };
 
 Range.prototype.includes = function(val){
-  var start = this.start;
-  var end = this.end;
-  var step = this.step;
-  var tracker = false;
-
-  if( start === null ){ return tracker; }
-
-  if( start !== null && end === start ){ return start === val; }
-
-  if( start !== null && end !== start ){
-    if( start > end ){
-      while( start >= end ){
-        if( start === val ){ tracker = true; }
-        start += step;
-      }
-      return tracker;
-    } else if( start < end ){
-      while( start <= end ){
-        if( end === val ){ tracker = true; }
-        end -= step;
-      }
-      return tracker;
-    }
-  }
+  return ((val >= this.start) && (val <= this.end) && (((this.start - val) % this.step) === 0));
 };
