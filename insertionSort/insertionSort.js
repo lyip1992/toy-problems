@@ -41,15 +41,15 @@
 
 var testingTransform = function(array) {
   var transform = [];
-  
+
   for (var i = 0; i < array.length; i++)
     transform.push({value: array[i], i: i});
 
   return transform;
 };
 
-var insertionSort = function(array) { // from solution lecture
-  
+var insertionSort = function(array) { // stil need to do extra credit
+
   for( var i = 1; i < array.length; i++ ) {
     var val = array[i];
     var hole = i;
@@ -65,5 +65,3 @@ var insertionSort = function(array) { // from solution lecture
   return array;
 
 };
-
-
